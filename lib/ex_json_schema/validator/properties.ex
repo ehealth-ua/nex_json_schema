@@ -59,8 +59,12 @@ defmodule NExJsonSchema.Validator.Properties do
 
   defp validate_additional_properties(_, _, _), do: []
 
-  defp validation_errors(validated_properties) do
-    validated_properties |> Dict.values() |> List.flatten()
+  defp validation_errors(validated_properties) when is_map(validated_properties) do
+    validated_properties |> Map.values() |> List.flatten()
+  end
+
+  defp validation_errors(validated_properties) when is_list(validated_properties) do
+    validated_properties |> Keyword.values() |> List.flatten()
   end
 
   defp properties_matching(properties, pattern) do
@@ -72,13 +76,17 @@ defmodule NExJsonSchema.Validator.Properties do
     unvalidated =
       properties
       |> keys_as_set()
-      |> Set.difference(keys_as_set(validated_properties))
+      |> MapSet.difference(keys_as_set(validated_properties))
       |> Enum.to_list()
 
     Map.take(properties, unvalidated)
   end
 
-  defp keys_as_set(properties) do
-    properties |> Dict.keys() |> Enum.into(HashSet.new())
+  defp keys_as_set(properties) when is_map(properties) do
+    properties |> Map.keys() |> Enum.into(MapSet.new())
+  end
+
+  defp keys_as_set(properties) when is_list(properties) do
+    properties |> Keyword.keys() |> Enum.into(MapSet.new())
   end
 end

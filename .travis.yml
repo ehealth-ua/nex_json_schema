@@ -19,4 +19,4 @@ env:
 before_install:
   - git submodule update --init --recursive
 script:
-  - "yes | mix do deps.get, deps.compile, compile, coveralls.travis"
+  - "mix do deps.get, deps.compile, compile, coveralls.travis"

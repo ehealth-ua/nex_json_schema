@@ -133,7 +133,7 @@ defmodule NExJsonSchema.Validator do
   end
 
   defp validate_aspect(_, _, {"minProperties", min_properties}, data) when is_map(data) do
-    case Map.size(data) >= min_properties do
+    case map_size(data) >= min_properties do
       true ->
         []
 
@@ -143,14 +143,14 @@ defmodule NExJsonSchema.Validator do
              :length,
              "expected a minimum of %{min} properties but got %{actual}",
              min: min_properties,
-             actual: Map.size(data)
+             actual: map_size(data)
            ), []}
         ]
     end
   end
 
   defp validate_aspect(_, _, {"maxProperties", max_properties}, data) when is_map(data) do
-    case Map.size(data) <= max_properties do
+    case map_size(data) <= max_properties do
       true ->
         []
 
@@ -160,7 +160,7 @@ defmodule NExJsonSchema.Validator do
              :length,
              "expected a maximum of %{max} properties but got %{actual}",
              max: max_properties,
-             actual: Map.size(data)
+             actual: map_size(data)
            ), []}
         ]
     end
@@ -394,6 +394,9 @@ defmodule NExJsonSchema.Validator do
     |> Enum.map(&valid?(root, &1, data))
     |> Enum.with_index()
     |> Enum.filter(filter)
-    |> Dict.values()
+    |> values()
   end
+
+  defp values(map) when is_map(map), do: Map.values(map)
+  defp values(list) when is_list(list), do: Keyword.values(list)
 end

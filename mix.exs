@@ -1,7 +1,7 @@
 defmodule NExJsonSchema.Mixfile do
   use Mix.Project
 
-  @version "0.8.1"
+  @version "0.8.2"
 
   def project do
     [
@@ -34,10 +34,10 @@ defmodule NExJsonSchema.Mixfile do
   # Type `mix help deps` for more examples and options
   defp deps do
     [
-      {:httpoison, "~> 0.11", only: :test},
+      {:httpoison, "~> 1.5", only: :test},
       {:jason, "~> 1.0", only: :test},
       {:excoveralls, "~> 0.6", only: :test},
-      {:mix_test_watch, "~> 0.3.0", only: [:dev, :test]},
+      {:mix_test_watch, "~> 0.9", only: [:dev, :test]},
       {:ex_doc, ">= 0.0.0", only: :dev}
     ]
   end

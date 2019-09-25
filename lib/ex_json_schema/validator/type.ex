@@ -46,11 +46,4 @@ defmodule NExJsonSchema.Validator.Type do
       is_map(data) -> "object"
     end
   end
-
-  defp type_name(type) do
-    type
-    |> List.wrap()
-    |> Enum.map(&String.capitalize/1)
-    |> Enum.join(", ")
-  end
 end

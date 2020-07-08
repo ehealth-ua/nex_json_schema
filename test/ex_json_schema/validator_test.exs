@@ -505,8 +505,34 @@ defmodule NExJsonSchema.ValidatorTest do
          description: "expected \"2012-12-12 12:12:12\" to be a valid ISO 8601 date-time",
          params: %{
            pattern:
-             "^(-?(?:[1-9][0-9]*)?[0-9]{4})-(1[0-2]|0[1-9])-(3[01]|0[1-9]|[12][0-9])T(2[0-3]|[01][0-9]):([0-5][0-9]):([0-5][0-9])(\\.[0-9]+)?(Z|[+-](?:2[0-3]|[01][0-9]):[0-5][0-9])?$",
+             "^([0-9]{4})-(1[0-2]|0[1-9])-(3[01]|0[1-9]|[12][0-9])T(2[0-3]|[01][0-9]):([0-5][0-9]):([0-5][0-9])(\\.[0-9]+)?(Z|[+-](?:2[0-3]|[01][0-9]):[0-5][0-9])?$",
            actual: "2012-12-12 12:12:12"
+         },
+         rule: :datetime
+       }, "$"}
+    ])
+
+    assert_validation_errors(%{"format" => "date-time"}, "-2012-12-12 12:12:12", [
+      {%{
+         raw_description: "expected \"%{actual}\" to be a valid ISO 8601 date-time",
+         description: "expected \"-2012-12-12 12:12:12\" to be a valid ISO 8601 date-time",
+         params: %{
+           pattern:
+             "^([0-9]{4})-(1[0-2]|0[1-9])-(3[01]|0[1-9]|[12][0-9])T(2[0-3]|[01][0-9]):([0-5][0-9]):([0-5][0-9])(\\.[0-9]+)?(Z|[+-](?:2[0-3]|[01][0-9]):[0-5][0-9])?$",
+           actual: "-2012-12-12 12:12:12"
+         },
+         rule: :datetime
+       }, "$"}
+    ])
+
+    assert_validation_errors(%{"format" => "date-time"}, "2000012-12-12 12:12:12", [
+      {%{
+         raw_description: "expected \"%{actual}\" to be a valid ISO 8601 date-time",
+         description: "expected \"2000012-12-12 12:12:12\" to be a valid ISO 8601 date-time",
+         params: %{
+           pattern:
+             "^([0-9]{4})-(1[0-2]|0[1-9])-(3[01]|0[1-9]|[12][0-9])T(2[0-3]|[01][0-9]):([0-5][0-9]):([0-5][0-9])(\\.[0-9]+)?(Z|[+-](?:2[0-3]|[01][0-9]):[0-5][0-9])?$",
+           actual: "2000012-12-12 12:12:12"
          },
          rule: :datetime
        }, "$"}
@@ -520,8 +546,34 @@ defmodule NExJsonSchema.ValidatorTest do
          description: "expected \"1988.12.12\" to be a valid ISO 8601 date",
          params: %{
            pattern:
-             "^([\\+-]?\\d{4}(?!\\d{2}\\b))((-?)((0[1-9]|1[0-2])(\\3([12]\\d|0[1-9]|3[01]))?|W([0-4]\\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\\d|[12]\\d{2}|3([0-5]\\d|6[1-6])))?)?$",
+             "^(\\d{4}(?!\\d{2}\\b))((-?)((0[1-9]|1[0-2])(\\3([12]\\d|0[1-9]|3[01]))?|W([0-4]\\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\\d|[12]\\d{2}|3([0-5]\\d|6[1-6])))?)?$",
            actual: "1988.12.12"
+         },
+         rule: :date
+       }, "$"}
+    ])
+
+    assert_validation_errors(%{"format" => "date"}, "-1988-12-12", [
+      {%{
+         raw_description: "expected \"%{actual}\" to be a valid ISO 8601 date",
+         description: "expected \"-1988-12-12\" to be a valid ISO 8601 date",
+         params: %{
+           pattern:
+             "^(\\d{4}(?!\\d{2}\\b))((-?)((0[1-9]|1[0-2])(\\3([12]\\d|0[1-9]|3[01]))?|W([0-4]\\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\\d|[12]\\d{2}|3([0-5]\\d|6[1-6])))?)?$",
+           actual: "-1988-12-12"
+         },
+         rule: :date
+       }, "$"}
+    ])
+
+    assert_validation_errors(%{"format" => "date"}, "+1988-12-12", [
+      {%{
+         raw_description: "expected \"%{actual}\" to be a valid ISO 8601 date",
+         description: "expected \"+1988-12-12\" to be a valid ISO 8601 date",
+         params: %{
+           pattern:
+             "^(\\d{4}(?!\\d{2}\\b))((-?)((0[1-9]|1[0-2])(\\3([12]\\d|0[1-9]|3[01]))?|W([0-4]\\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\\d|[12]\\d{2}|3([0-5]\\d|6[1-6])))?)?$",
+           actual: "+1988-12-12"
          },
          rule: :date
        }, "$"}

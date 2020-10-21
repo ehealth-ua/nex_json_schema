@@ -87,6 +87,6 @@ defmodule NExJsonSchema.Validator.Properties do
   end
 
   defp keys_as_set(properties) when is_list(properties) do
-    properties |> Keyword.keys() |> Enum.into(MapSet.new())
+    properties |> Enum.map(fn {key, _} -> key end) |> Enum.into(MapSet.new())
   end
 end

@@ -20,7 +20,7 @@ defmodule NExJsonSchema.Mixfile do
   #
   # Type `mix help compile.app` for more information
   def application do
-    [applications: []]
+    [extra_applications: []]
   end
 
   # Dependencies can be Hex packages:
@@ -38,7 +38,6 @@ defmodule NExJsonSchema.Mixfile do
       {:jason, "~> 1.2.2", only: :test},
       {:decimal, "~> 2.0"},
       {:excoveralls, "~> 0.6", only: :test},
-      {:mix_test_watch, "~> 0.9", only: [:dev, :test]},
       {:ex_doc, ">= 0.0.0", only: :dev}
     ]
   end

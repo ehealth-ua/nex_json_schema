@@ -35,7 +35,7 @@ defmodule NExJsonSchema.Mixfile do
   defp deps do
     [
       {:httpoison, "~> 1.5", only: :test},
-      {:jason, "~> 1.2.2", only: [:dev, :test]},
+      {:jason, "~> 1.3.0", only: [:dev, :test]},
       {:decimal, "~> 2.0"},
       {:excoveralls, "~> 0.14.2", only: [:dev, :test]},
       {:ex_doc, ">= 0.0.0", only: :dev},

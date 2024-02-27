@@ -5,10 +5,10 @@ defmodule NExJsonSchema.Mixfile do
 
   def project do
     [
-      app: :nex_json_schema,
+      app: :nex_json_schema2,
       version: @version,
       elixir: "~> 1.0",
-      description: "A JSON Schema validator with full support for the draft 4 specification and zero dependencies.",
+      description: "A JSON Schema validator without circulae deps support.",
       deps: deps(),
       package: package(),
       test_coverage: [tool: ExCoveralls],
@@ -16,22 +16,10 @@ defmodule NExJsonSchema.Mixfile do
     ]
   end
 
-  # Configuration for the OTP application
-  #
-  # Type `mix help compile.app` for more information
   def application do
-    [extra_applications: []]
+    [extra_applications: [:ssl]]
   end
 
-  # Dependencies can be Hex packages:
-  #
-  #   {:mydep, "~> 0.3.0"}
-  #
-  # Or git/path repositories:
-  #
-  #   {:mydep, git: "https://github.com/elixir-lang/mydep.git", tag: "0.1.0"}
-  #
-  # Type `mix help deps` for more examples and options
   defp deps do
     [
       {:httpoison, "~> 1.5", only: :test},
@@ -46,9 +34,9 @@ defmodule NExJsonSchema.Mixfile do
   defp package do
     [
       files: ~w(lib mix.exs README.md LICENSE),
-      maintainers: ["Jonas Schmidt", "Nebo #15"],
+      maintainers: ["Namdak Tonpa", "ЕСОЗ"],
       licenses: ["MIT"],
-      links: %{"GitHub" => "https://github.com/nebo15/nex_json_schema"}
+      links: %{"GitHub" => "https://github.com/ehealth-ua/nex_json_schema"}
     ]
   end
 end

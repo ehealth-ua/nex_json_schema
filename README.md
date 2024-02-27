@@ -1,6 +1,6 @@
 # Elixir JSON Schema validator
 
-[![Hex.pm](http://img.shields.io/hexpm/l/nex_json_schema2.svg)](LICENSE)
+[![Hex pm](http://img.shields.io/hexpm/v/nex_json_schema2.svg?style=flat&x=1)](https://hex.pm/packages/nex_json_schema2)
 
 A JSON Schema validator with full support for the draft 4 specification and zero dependencies. Passes the official [JSON Schema Test Suite](https://github.com/json-schema/JSON-Schema-Test-Suite).
 

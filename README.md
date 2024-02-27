@@ -10,7 +10,7 @@ Add the project to your Mix dependencies in `mix.exs`:
 
 ```elixir
 defp deps do
-  [{:nex_json_schema, "~> 0.8.6"}]
+  [{:nex_json_schema2, "~> 0.8.6"}]
 end
 ```
 

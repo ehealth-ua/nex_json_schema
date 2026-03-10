@@ -82,12 +82,12 @@ defmodule NExJsonSchema.ValidatorTest do
     Enum.each(errors, fn {%{rule: rule}, path} ->
       expected_path =
         case rule do
-          :cast -> "$.bar.array.[0].string"
+          :cast -> "$.bar.array[0].string"
           :number -> "$.bar.max"
           :length -> "$.bar.minLength"
           :format -> "$.bar.pattern"
           :schema -> "$.bar.int"
-          :required -> "$.bar.array.[1].required"
+          :required -> "$.bar.array[1].required"
         end
 
       assert expected_path == path
@@ -292,13 +292,13 @@ defmodule NExJsonSchema.ValidatorTest do
          description: "type mismatch. Expected string but got integer",
          params: %{expected: "string", actual: "integer"},
          rule: :cast
-       }, "$.[2]"},
+       }, "$[2]"},
       {%{
          raw_description: "type mismatch. Expected %{expected} but got %{actual}",
          description: "type mismatch. Expected string but got object",
          params: %{expected: "string", actual: "object"},
          rule: :cast
-       }, "$.[3]"}
+       }, "$[3]"}
     ])
   end
 
@@ -315,19 +315,19 @@ defmodule NExJsonSchema.ValidatorTest do
            description: "type mismatch. Expected string but got object",
            params: %{expected: "string", actual: "object"},
            rule: :cast
-         }, "$.[0]"},
+         }, "$[0]"},
         {%{
            raw_description: "type mismatch. Expected %{expected} but got %{actual}",
            description: "type mismatch. Expected integer but got string",
            params: %{expected: "integer", actual: "string"},
            rule: :cast
-         }, "$.[2]"},
+         }, "$[2]"},
         {%{
            raw_description: "type mismatch. Expected %{expected} but got %{actual}",
            description: "type mismatch. Expected boolean but got number",
            params: %{expected: "boolean", actual: "number"},
            rule: :cast
-         }, "$.[4]"}
+         }, "$[4]"}
       ]
     )
   end
@@ -339,13 +339,13 @@ defmodule NExJsonSchema.ValidatorTest do
          description: "schema does not allow additional items",
          params: %{},
          rule: :schema
-       }, "$.[1]"},
+       }, "$[1]"},
       {%{
          raw_description: "schema does not allow additional items",
          description: "schema does not allow additional items",
          params: %{},
          rule: :schema
-       }, "$.[2]"}
+       }, "$[2]"}
     ])
   end
 
@@ -500,7 +500,7 @@ defmodule NExJsonSchema.ValidatorTest do
            description: "type mismatch. Expected integer but got string",
            params: %{expected: "integer", actual: "string"},
            rule: :cast
-         }, "$.foo.[1].bar"}
+         }, "$.foo[1].bar"}
       ]
     )
   end
@@ -627,7 +627,8 @@ defmodule NExJsonSchema.ValidatorTest do
          raw_description: "expected \"%{actual}\" to be an email address",
          description: "expected \"foo@\" to be an email address",
          params: %{
-           pattern: "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[A-Z0-9-]+\\.)+[A-Z]{2,6}$",
+           pattern:
+             "^[a-zA-Z0-9](?:[a-zA-Z0-9._%+-]{0,63}[a-zA-Z0-9])?@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*\\.[a-zA-Z]{2,63}$",
            actual: "foo@"
          },
          rule: :email

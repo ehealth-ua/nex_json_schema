@@ -12,6 +12,8 @@ defmodule NExJsonSchema.Validator do
   @type errors :: [{String.t(), String.t()}] | []
   @type errors_with_list_paths :: [{String.t(), [String.t() | integer]}] | []
 
+  @path_item_regex ~r/^(\[\d+\]|\$)$/
+
   @spec validate(Root.t(), NExJsonSchema.data()) :: :ok | {:error, errors}
   def validate(root = %Root{}, data) do
     errors = root |> validate(root.schema, data, ["$"]) |> errors_with_string_paths
@@ -44,7 +46,7 @@ defmodule NExJsonSchema.Validator do
   def valid?(root, schema, data), do: root |> validate(schema, data) |> Enum.empty?()
 
   defp errors_with_string_paths(errors) do
-    Enum.map(errors, fn {msg, path} -> {msg, Enum.join(path, ".")} end)
+    Enum.map(errors, fn {msg, path} -> {msg, join_path(path)} end)
   end
 
   def format_error(rule, raw_description, params \\ []) do
@@ -412,4 +414,16 @@ defmodule NExJsonSchema.Validator do
 
   defp values(map) when is_map(map), do: Map.values(map)
   defp values(list) when is_list(list), do: Keyword.values(list)
+
+  defp join_path(path, acc \\ "")
+
+  defp join_path([], acc), do: acc
+
+  defp join_path([path_item | path], acc) do
+    if String.match?(path_item, @path_item_regex) do
+      join_path(path, acc <> path_item)
+    else
+      join_path(path, acc <> "." <> path_item)
+    end
+  end
 end

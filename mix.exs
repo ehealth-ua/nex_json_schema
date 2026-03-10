@@ -27,7 +27,7 @@ defmodule NExJsonSchema.Mixfile do
       {:decimal, "~> 2.0"},
       {:excoveralls, "~> 0.14.2", only: [:dev, :test]},
       {:ex_doc, ">= 0.0.0", only: :dev},
-      {:credo, "~> 1.6.1", only: [:dev, :test]}
+      {:credo, "~> 1.7.17", only: [:dev, :test]}
     ]
   end
 

@@ -420,10 +420,12 @@ defmodule NExJsonSchema.Validator do
   defp join_path([], acc), do: acc
 
   defp join_path([path_item | path], acc) do
-    if String.match?(path_item, @path_item_regex) do
-      join_path(path, acc <> path_item)
+    path_item_str = if is_binary(path_item), do: path_item, else: to_string(path_item)
+
+    if String.match?(path_item_str, @path_item_regex) do
+      join_path(path, acc <> path_item_str)
     else
-      join_path(path, acc <> "." <> path_item)
+      join_path(path, acc <> "." <> path_item_str)
     end
   end
 end

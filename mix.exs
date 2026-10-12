@@ -22,12 +22,12 @@ defmodule NExJsonSchema.Mixfile do
 
   defp deps do
     [
-      {:httpoison, "~> 1.5", only: :test},
-      {:jason, "~> 1.3.0", only: [:dev, :test]},
-      {:decimal, "~> 2.0"},
-      {:excoveralls, "~> 0.14.2", only: [:dev, :test]},
+      {:httpoison, "~> 3.0", only: :test},
+      {:jason, "~> 1.4", only: [:dev, :test]},
+      {:decimal, "~> 3.2"},
+      {:excoveralls, "~> 0.18", only: [:dev, :test]},
       {:ex_doc, ">= 0.0.0", only: :dev},
-      {:credo, "~> 1.7.17", only: [:dev, :test]}
+      {:credo, "~> 1.7.19", only: [:dev, :test]}
     ]
   end
 
